@@ -10,7 +10,8 @@ import bankcustomers.BankCustomer;
 import gencustaccount.AccountIf;
 import gencustaccount.CustomerIf;
 import java.util.ArrayList;
-
+import java.util.Scanner;
+import bankcustomers.Facade;
 /**
  *
  * @author sarun
@@ -20,28 +21,43 @@ public class BankFacade {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
        ArrayList<AccountIf> cust1Accounts = new ArrayList();
        AccountIf acc = new BankAccount(12345);
-       acc.deposit(500);
        cust1Accounts.add(acc);
        acc = new BankAccount(12346);
-       acc.deposit(1000);
        cust1Accounts.add(acc);
        CustomerIf cust1 = new BankCustomer("John", cust1Accounts);
-       System.out.println("Customer and account information");
-       System.out.println("Name = " + cust1.getCustomerName());
-       System.out.println("Has " + cust1.getNumAccounts() + " accounts");
-       acc = cust1.getAccount(12345);
-       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
-       acc = cust1.getAccount(12346);
-       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
-       acc.deposit(1000);
-       System.out.println("Account Number: " + acc.getAccountNumber() + " has " + acc.getBalance());
-       ArrayList<AccountIf> accounts = cust1.getllAccounts();
-       for(AccountIf account : accounts) {
-           System.out.println("Account number " + account.getAccountNumber() + " has " + account.getBalance());
+       ArrayList<AccountIf> cust2Accounts = new ArrayList();
+        AccountIf acc2 = new BankAccount(54321);
+        cust2Accounts.add(acc2);
+        acc2 = new BankAccount(98760);
+        cust2Accounts.add(acc2);
+        CustomerIf cust2 = new BankCustomer("Dewin", cust2Accounts);
+        ArrayList<CustomerIf> cuslist = new ArrayList();
+        cuslist.add(cust1);
+        cuslist.add(cust2);
+        Facade facade = Facade.getMyFacadeObject(cuslist);
+        
+        facade.doDeposit(500, cust1, 12345);
+        facade.doDeposit(1000, cust1, 12346);
+        facade.getBankAccount(cust1, 12345);
+        facade.getBankAccount(cust1, 12346);
+        
+        facade.doDeposit(500, cust2, 54321);
+        facade.doDeposit(1000, cust2, 98760);
+        facade.getBankAccount(cust2, 54321);
+        facade.getBankAccount(cust2, 98760);
+        
+        facade.doDeposit(1000, cust1, 12345);
+        facade.doDeposit(500, cust2, 54321);
+        
+        //facade.getBankCustomer("John");
+        //facade.getBankCustomer("Dewin");
        }
+       
     }
     
-}
+    
+
