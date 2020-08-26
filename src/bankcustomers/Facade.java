@@ -9,7 +9,7 @@ import gencustaccount.CustomerIf;
 import java.util.ArrayList;
 /**
  *
- * @author black
+ * @author sarun
  */
 public class Facade {
     private static Facade FObj = null;

@@ -24,6 +24,7 @@ public class BankFacade {
     
     public static void main(String[] args) {
        ArrayList<AccountIf> cust1Accounts = new ArrayList();
+       ArrayList<CustomerIf> cuslist = new ArrayList();
        AccountIf acc = new BankAccount(12345);
        cust1Accounts.add(acc);
        acc = new BankAccount(12346);
@@ -34,27 +35,22 @@ public class BankFacade {
         cust2Accounts.add(acc2);
         acc2 = new BankAccount(98760);
         cust2Accounts.add(acc2);
-        CustomerIf cust2 = new BankCustomer("Dewin", cust2Accounts);
-        ArrayList<CustomerIf> cuslist = new ArrayList();
+        CustomerIf cust2 = new BankCustomer("jim", cust2Accounts);
         cuslist.add(cust1);
         cuslist.add(cust2);
         Facade facade = Facade.getMyFacadeObject(cuslist);
-        
         facade.doDeposit(500, cust1, 12345);
         facade.doDeposit(1000, cust1, 12346);
         facade.getBankAccount(cust1, 12345);
         facade.getBankAccount(cust1, 12346);
-        
         facade.doDeposit(500, cust2, 54321);
         facade.doDeposit(1000, cust2, 98760);
         facade.getBankAccount(cust2, 54321);
         facade.getBankAccount(cust2, 98760);
-        
         facade.doDeposit(1000, cust1, 12345);
         facade.doDeposit(500, cust2, 54321);
         
-        //facade.getBankCustomer("John");
-        //facade.getBankCustomer("Dewin");
+
        }
        
     }
